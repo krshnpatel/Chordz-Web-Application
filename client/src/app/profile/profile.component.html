@@ -1,0 +1,74 @@
+<div *ngIf="auth.authenticated() && auth.userProfile && getUserChordsJson()">
+    
+    <h4 class="center">Welcome {{auth.userProfile.name}}!</h4>
+    
+    <div class="container">
+        <ul class="collapsible popout" data-collapsible="expandable" onclick="$(document).ready(function(){ $('.collapsible').collapsible(); });">
+             <li>
+                <div class="collapsible-header cyan lighten-3">CREATE CHORDZ</div>
+                <div class="collapsible-body cyan lighten-5">
+                    <div class="row createForm">
+                        <form class="col s12">
+                            <div class="row center">
+                                <div class="switch" id="publicSwitch">
+                                    <label>
+                                        Private
+                                        <input type="checkbox" #isPublic>
+                                        <span class="lever"></span>
+                                        Public
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate" #title>
+                                    <label for="title">Title</label>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="version" type="number" class="validate" #version>
+                                    <label for="version">Version</label>
+                                </div>
+                            </div> -->                           
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc></textarea>
+                                    <label for="chordDoc">Chordz</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col s12 center createButton">
+                            <button class="btn" (click)="createChordSheet(isPublic.checked, chordDoc.value)">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>       
+    </div>
+    
+    <div class="block center">
+        <a href="/profile/edit-chords"><button class="btn editButton cyan lighten-3">EDIT CHORDZ</button></a>
+    </div>
+
+    <h5 class="center">YOUR CHORDZ</h5>
+    <h6 class="center"><strong>NOTE:</strong> If your newly created chord sheet does not show then you might have an error in your chord sheet. Check out <a href="/profile/errors">this</a> page for more details.</h6>
+    
+    <div class="container userChords">
+        <ul class="collapsible popout" data-collapsible="accordion">
+            <li *ngFor="let userChord of userChords">
+                <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
+                <div class="collapsible-body teal lighten-4">
+                    <p>Version: {{ userChord.version }}<br/><br/>
+                    Last Updated: {{ userChord.lastUpdated }}<br/><br/>
+                    Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/>
+                    Chordz:<br/><br/>
+                    <span [innerHTML]="userChord.chordDoc"></span></p>
+                    <div class="col s12 center deleteButton">
+                        <button class="btn" (click)="deleteChordSheet(userChord.title, userChord.version)">Delete</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

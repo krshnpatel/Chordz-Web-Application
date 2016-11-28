@@ -1,0 +1,8 @@
+.inputFields {
+    margin-top: 5%;
+    width: 500px;
+}
+
+#username, #password, label {
+    font-size: 15px;
+}

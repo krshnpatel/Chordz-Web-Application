@@ -1,0 +1,52 @@
+<div *ngIf="auth.authenticated() && auth.userProfile && getUserChordsJson()">
+    
+    <h5 class="center">EDIT YOUR CHORDZ</h5>
+    
+    <div class="container userChords">
+        <ul class="collapsible popout" data-collapsible="accordion">
+             <li *ngFor="let userChord of userChords">
+                <div class="collapsible-header cyan lighten-3"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
+                <div class="collapsible-body cyan lighten-5">
+                    <div class="row editForm">
+                        <form class="col s12">
+                            <div class="row center">
+                                <div class="switch" id="publicSwitch">
+                                    <label>
+                                        Private
+                                        <input type="checkbox" [checked]="userChord.isPublic" #isPublic>
+                                        <span class="lever"></span>
+                                        Public
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row lastUpdatedAndVersion">
+                                <div class="col s6 center">
+                                    <p>Version: {{ userChord.version }}</p> 
+                                </div>
+                                <div class="col s6 center">
+                                    <p>Last Updated: {{ userChord.lastUpdated }}</p> 
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate" [value]="userChord.title" #title>
+                                    <label for="title" class="active">Title</label>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc>{{ userChord.chordDoc }}</textarea>
+                                    <label for="chordDoc" class="active">Chordz</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col s12 center formButtons">
+                            <button class="btn" (click)="saveChordSheet(userChord.version, chordDoc.value, isPublic.checked)">Save</button>
+                            <button class="btn" (click)="clearChordSheet(chordDoc)">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>       
+    </div>
+</div>

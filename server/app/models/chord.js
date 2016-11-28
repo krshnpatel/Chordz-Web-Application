@@ -5,7 +5,9 @@ var ChordSchema   = new Schema({
     email: String,
     title: String,
     version: Number,
-    chordDoc: String
+    lastUpdated: String,
+    chordDoc: String,
+    isPublic: Boolean
 });
 
 module.exports = mongoose.model('Chord', ChordSchema);

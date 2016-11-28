@@ -44,19 +44,22 @@ router.post('/user', function(req, res) {
 
 router.post('/verifyUser', function(req, res) {
     
-    var email = req.body.email;
+    var userEmail = req.body.email;
+    console.log(userEmail);
     var password = req.body.password;
+    console.log(password);
     
-    User.find({email: email}, function (err, thisUser) {
-        if (err)
-            return res.send(err);
+    User.find({email: userEmail}, function (err, thisUser) {
+        if (err || thisUser.length == 0)
+            res.json({ message: false });
         else
         {
-            bcrypt.compare(password, thisUser.password, function(err, result) {
+            bcrypt.compare(password, thisUser[0].password, function(err, result)
+            {
                 if (err)
                     return res.send(err);
-                    
-                return res.json(result);
+                
+                res.json({ message: result });
             });
         }
     });
@@ -103,5 +106,6 @@ router.put('/user/:user_id', function(req, res) {
         });
     });
 });
+
 
 module.exports = router;

@@ -1,0 +1,44 @@
+h4, h5 {
+    margin-top: 3%;
+}
+
+.userChords {
+    margin-bottom: 5%;
+}
+
+.createButton {
+    margin-top: 3%;
+}
+
+#publicSwitch {
+    margin-top: 3%;
+}
+
+.createForm {
+    padding: 2%;
+}
+
+.collapsible-header {
+    font-size: 20px;
+}
+
+.collapsible-body {
+    font-size: 18px;
+}
+
+.editButton {
+    width: 70%;
+    height: 44px;
+    color: black;
+    font-size: 20px;
+    text-align: left;
+}
+
+
+.deleteButton {
+    margin-bottom: 3%;
+}
+
+h6 {
+    margin-bottom: 2%;
+}

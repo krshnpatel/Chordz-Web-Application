@@ -1,0 +1,31 @@
+h5 {
+    margin-top: 3%;
+}
+
+.userChords {
+    margin-bottom: 5%;
+}
+
+.formButtons {
+    margin-top: 3%;
+}
+
+#publicSwitch {
+    margin-top: 3%;
+}
+
+.editForm {
+    padding: 2%;
+}
+
+.collapsible-header {
+    font-size: 20px;
+}
+
+.collapsible-body {
+    font-size: 18px;
+}
+
+.lastUpdatedAndVersion {
+    font-size: 1rem;
+}

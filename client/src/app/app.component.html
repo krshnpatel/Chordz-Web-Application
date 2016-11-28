@@ -1,0 +1,38 @@
+    <nav>
+        <div class="nav-wrapper mainNavbar">
+            <a href="" class="brand-logo center">CHORDZ</a>
+            <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-small-only" height="64" width="64"/>
+            <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-med-and-up" height="56" width="56"/>
+            <ul class="right hide-on-small-only">
+                <!-- <li id="signUp" class="active"><a *ngIf="!auth.authenticated()" href="#">SIGN UP</a></li> -->
+                <li id="myChordz"><a *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</a></li>
+            </ul>
+            <ul class="left hide-on-small-only">
+                <!-- <li id="localLogin"><a *ngIf="!auth.authenticated()" routerLink="/login" routerLinkActive="active">LOG IN</a></li> -->
+                <li id="socialLogin"><a *ngIf="!auth.authenticated()" (click)="auth.login()">LOG IN / SIGN UP</a></li>
+                <li id="socialLogin"><a *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row center hide-on-med-and-up">
+        <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" routerLink="/login">LOG IN</div> -->
+        <div class="col s12 menuButton" *ngIf="!auth.authenticated()" (click)="auth.login()" >LOG IN / SIGN UP</div>
+        <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" href="#">SIGN UP</div> -->
+        <div class="col s12 menuButton" *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</div>
+        <div class="col s12 menuButton" *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</div>
+    </div>
+    
+    <router-outlet></router-outlet>
+    
+    <app-about *ngIf="!auth.authenticated() && checkRoute()"></app-about>
+    
+    <div *ngIf="checkRoute()" class="container publicChords">
+        <h5 class="center">PUBLIC CHORDZ</h5>
+        <ul class="collapsible popout" data-collapsible="accordion">
+            <li *ngFor="let publicChord of publicChords">
+                <div class="collapsible-header teal lighten-5"><strong>{{ publicChord.title }}</strong> by <em>{{ publicChord.email }}</em></div>
+                <div class="collapsible-body teal lighten-4"><p>Version: {{ publicChord.version }}<br/><br/>Chordz:<br/><br/><span [innerHTML]="publicChord.chordDoc"></span></p></div>
+            </li>
+        </ul>       
+    </div>

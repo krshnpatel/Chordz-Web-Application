@@ -9,6 +9,7 @@ router.get('/chord', function(req, res) {
         if (err)
             return res.send(err);
             
+        console.log(chords);
         res.json(chords);
     });
 });
@@ -23,6 +24,10 @@ router.put('/chord/:chord_id', function(req, res) {
         chord.title = req.body.title;
         chord.version = req.body.version;
         chord.chordDoc = req.body.chordDoc;
+        chord.isPublic = req.body.isPublic;
+            
+        var date = new Date();
+        chord.lastUpdated = date.toLocaleString();
 
         // save the chord
         chord.save(function(err) {
@@ -41,8 +46,13 @@ router.post('/chord', function(req, res) {
     chord.title = req.body.title;
     chord.version = req.body.version;
     chord.chordDoc = req.body.chordDoc;
+    chord.isPublic = req.body.isPublic;
     
-    // save the bear and check for errors
+    var date = new Date();
+    chord.lastUpdated = date.toLocaleString();
+    
+    console.log(chord);
+    
     chord.save(function(err) {
         if (err)
             return res.send(err);
@@ -52,14 +62,19 @@ router.post('/chord', function(req, res) {
 });
 
 
-router.delete('/chord/:chord_id', function(req, res) {
-    Chord.remove({
-        _id: req.params.chord_id
-    }, function(err, chord) {
-        if (err)
+router.put('/chord', function(req, res) {
+    Chord.remove({ //_id: req.params.chord_id
+    email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord)
+    {
+        if (err || chord.length == 0)
+        {
+            console.log("error");
             return res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        }
+        else
+        {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 

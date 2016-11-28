@@ -1,0 +1,44 @@
+.mainNavbar {
+    background-color: #37474f;
+}
+
+li:hover {
+    background-color: #546e7a;
+}
+
+#localLogin, #socialLogin {
+    border-right-style: solid;
+    border-right-color: white;
+}
+
+#signUp, #myChordz {
+    border-left-style: solid;
+    border-left-color: white;
+}
+
+.menuButton {
+    background-color: #37474f;
+    color: white;
+    padding: 10px;
+    border-top-style: solid;
+    border-top-color: #546e7a;
+    border-top-width: 2px;
+}
+
+.menuButton:hover {
+    background-color: #546e7a;
+    color:black;
+}
+
+.publicChords {
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.collapsible-header {
+    font-size: 20px;
+}
+
+.collapsible-body {
+    font-size: 18px;
+}
