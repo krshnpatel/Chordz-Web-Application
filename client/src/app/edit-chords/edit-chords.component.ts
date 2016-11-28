@@ -44,6 +44,8 @@ export class EditChordsComponent implements OnInit {
       this.chordsService.postUserChord(this.auth.userProfile.email, title, version + 1, chordDoc, isPublic).subscribe((result) => {
         console.log("Result = " + result);
       });
+      
+      window.location.reload();
     }
     else if (chordDoc.includes("{t:"))
     {
@@ -53,6 +55,7 @@ export class EditChordsComponent implements OnInit {
       this.chordsService.postUserChord(this.auth.userProfile.email, title, version + 1, chordDoc, isPublic).subscribe((result) => {
         console.log("Result = " + result);
       });
+      window.location.reload();
     }
     else
     {
