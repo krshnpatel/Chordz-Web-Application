@@ -3,15 +3,15 @@
     <h4 class="center">Welcome {{auth.userProfile.name}}!</h4>
     
     <div class="container">
-        <ul class="collapsible popout" data-collapsible="expandable" onclick="$(document).ready(function(){ $('.collapsible').collapsible(); });">
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion"> <!-- onclick="$(document).ready(function(){ $('.collapsible').collapsible(); });" -->
              <li>
                 <div class="collapsible-header cyan lighten-3">CREATE CHORDZ</div>
                 <div class="collapsible-body cyan lighten-5">
                     <div class="row createForm">
                         <form class="col s12">
                             <div class="row center">
-                                <div class="switch" id="publicSwitch">
-                                    <label>
+                                <div class="switch" id="publicSwitchCreate">
+                                    <label id="switchLabels">
                                         Private
                                         <input type="checkbox" #isPublic>
                                         <span class="lever"></span>
@@ -55,20 +55,49 @@
     <h6 class="center"><strong>NOTE:</strong> If your newly created chord sheet does not show then you might have an error in your chord sheet. Check out <a href="/profile/errors">this</a> page for more details.</h6>
     
     <div class="container userChords">
-        <ul class="collapsible popout" data-collapsible="accordion">
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
             <li *ngFor="let userChord of userChords">
                 <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
                 <div class="collapsible-body teal lighten-4">
+                    
+                    <div class="right">
+                        <i class="medium material-icons right waves-effect waves-light modal-trigger" (click)="openModal()">launch</i>
+                    </div>
+
+                    <!-- {{ getPrivacy(userChord.isPublic) }}<br/><br/> -->
+                    
                     <p>Version: {{ userChord.version }}<br/><br/>
-                    Last Updated: {{ userChord.lastUpdated }}<br/><br/>
-                    Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/>
+                    Last Updated: {{ userChord.lastUpdated }}
+                    </p>
+                    <div class="switch" id="publicSwitch">
+                        Privacy:
+                        <label id="switchLabels">
+                            Private
+                            <input type="checkbox" (change)="changePrivacy(userChord.title, userChord.version, isPublic.checked)" [checked]="userChord.isPublic" #isPublic />
+                            <span class="lever"></span>
+                            Public
+                        </label>
+                    </div>
+                    <p>
                     Chordz:<br/><br/>
                     <span [innerHTML]="userChord.chordDoc"></span></p>
                     <div class="col s12 center deleteButton">
-                        <button class="btn" (click)="deleteChordSheet(userChord.title, userChord.version)">Delete</button>
+                        <button class="btn red darken-2" (click)="deleteChordSheet(userChord.title, userChord.version)"><i class="material-icons right">delete</i>Delete</button>
                     </div>
                 </div>
             </li>
         </ul>
+    </div>
+</div>
+
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+    <a class="waves-effect btn-flat right" (click)="closeModal()"><i class="material-icons right">clear</i>Close</a>
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
 </div>

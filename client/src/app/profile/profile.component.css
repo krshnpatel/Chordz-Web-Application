@@ -10,8 +10,18 @@ h4, h5 {
     margin-top: 3%;
 }
 
-#publicSwitch {
+#publicSwitchCreate {
     margin-top: 3%;
+}
+
+#publicSwitch {
+    margin-left: 2rem;
+}
+
+#switchLabels {
+    color: #4e342e;
+    font-size: 15px;
+    margin-left: 2%;
 }
 
 .createForm {
@@ -41,4 +51,12 @@ h4, h5 {
 
 h6 {
     margin-bottom: 2%;
+}
+
+#modal1 {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    top: 0% !important;
+    bottom: 0%;
 }

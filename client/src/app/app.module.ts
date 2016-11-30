@@ -17,6 +17,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { EditChordsComponent } from './edit-chords/edit-chords.component';
 import { ErrorsComponent } from './errors/errors.component';
 
+import { MaterializeModule } from 'angular2-materialize';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ErrorsComponent } from './errors/errors.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    router
+    router,
+    MaterializeModule
   ],
   providers: [
     AUTH_PROVIDERS,

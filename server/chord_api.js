@@ -63,19 +63,57 @@ router.post('/chord', function(req, res) {
 
 
 router.put('/chord', function(req, res) {
-    Chord.remove({ //_id: req.params.chord_id
-    email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord)
+    
+    if (req.body.isDelete)
     {
-        if (err || chord.length == 0)
+        console.log("delete");
+        
+        Chord.remove({
+        email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord)
         {
-            console.log("error");
-            return res.send(err);
-        }
-        else
+            if (err || chord.length == 0)
+            {
+                console.log("error");
+                return res.send(err);
+            }
+            else
+            {
+                res.json({ message: 'Successfully deleted' });
+            }
+        });
+    }
+    else
+    {
+        console.log("not delete");
+        console.log(req.body.email + " -- " + req.body.title + " -- " + req.body.version + " -- " + req.body.isPublic);
+        
+        Chord.find({
+        email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord)
         {
-            res.json({ message: 'Successfully deleted' });
-        }
-    });
+            if (err || chord.length == 0)
+            {
+                console.log("error");
+                return res.send(err);
+            }
+            else
+            {
+                chord[0].isPublic = req.body.isPublic;
+                
+                chord[0].save(function(err)
+                {
+                    if (err)
+                    {
+                        console.log("error!!!");
+                        return res.send(err);
+                    }
+    
+                    res.json({ message: 'Successfully edited' });
+                });
+            }
+        });
+    }
+    
+    /**/
 });
 
 router.get('/chord/:chord_id', function(req, res) {

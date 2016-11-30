@@ -29,7 +29,7 @@
     
     <div *ngIf="checkRoute()" class="container publicChords">
         <h5 class="center">PUBLIC CHORDZ</h5>
-        <ul class="collapsible popout" data-collapsible="accordion">
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
             <li *ngFor="let publicChord of publicChords">
                 <div class="collapsible-header teal lighten-5"><strong>{{ publicChord.title }}</strong> by <em>{{ publicChord.email }}</em></div>
                 <div class="collapsible-body teal lighten-4"><p>Version: {{ publicChord.version }}<br/><br/>Chordz:<br/><br/><span [innerHTML]="publicChord.chordDoc"></span></p></div>

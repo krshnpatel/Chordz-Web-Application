@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { Auth } from '../auth.service';
 import { ChordsService } from '../chords.service';
+
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,7 @@ export class ProfileComponent implements OnInit {
   
   counter = 1;
   userChords;
+  modalActions = new EventEmitter<string|MaterializeAction>();
   
   constructor(private auth: Auth, private chordsService: ChordsService) {}
 
@@ -94,5 +97,23 @@ export class ProfileComponent implements OnInit {
       console.log("Delete Message: " + result);
       window.location.reload();
     });
+  }
+  
+  changePrivacy(title, version, isPublic)
+  {
+    console.log("on change");
+    this.chordsService.changePrivacySetting(this.auth.userProfile.email, title, version, isPublic).subscribe((result) => {
+      console.log("Privacy changed");
+    });
+  }
+  
+  openModal()
+  {
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+  
+  closeModal()
+  {
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 }

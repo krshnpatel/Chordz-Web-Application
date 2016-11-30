@@ -3,13 +3,13 @@
     <h5 class="center">EDIT YOUR CHORDZ</h5>
     
     <div class="container userChords">
-        <ul class="collapsible popout" data-collapsible="accordion">
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
              <li *ngFor="let userChord of userChords">
                 <div class="collapsible-header cyan lighten-3"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
                 <div class="collapsible-body cyan lighten-5">
                     <div class="row editForm">
                         <form class="col s12">
-                            <div class="row center">
+                            <!-- <div class="row center">
                                 <div class="switch" id="publicSwitch">
                                     <label>
                                         Private
@@ -18,7 +18,7 @@
                                         Public
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row lastUpdatedAndVersion">
                                 <div class="col s6 center">
                                     <p>Version: {{ userChord.version }}</p> 

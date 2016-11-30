@@ -120,11 +120,31 @@ export class ChordsService {
   
   deleteUserChord(userEmail, title, version)
   {
+    var isDelete = true;
+    
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
         
     let options = new RequestOptions({ headers: headers});
-    let body = JSON.stringify({ email: userEmail, title: title, version: version});
+    let body = JSON.stringify({ email: userEmail, title: title, version: version, isDelete: isDelete});
+    
+    return this.http
+    .put('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
+    .map((response: Response) => response.json())
+    .map((response) => {
+        console.log(response);
+    });
+  }
+  
+  changePrivacySetting(userEmail, title, version, isPublic)
+  {
+    var isDelete = false;
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+        
+    let options = new RequestOptions({ headers: headers});
+    let body = JSON.stringify({ email: userEmail, title: title, version: version, isPublic: isPublic, isDelete: isDelete});
     
     return this.http
     .put('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
