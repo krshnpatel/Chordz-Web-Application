@@ -2,9 +2,6 @@
     <div class="nav-wrapper mainNavbar">
         <a href="" class="brand-logo center">CHORDZ</a>
         
-        <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped" id="fullscreenModeButton1" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode"><i id="fullscreenModeButton1Icon" class="material-icons modal-trigger center" (click)="openModal()">launch</i></a>
-        <a class="btn-flat right hide-on-med-and-up" id="fullscreenModeButton2"><i id="fullscreenModeButton2Icon" class="material-icons modal-trigger center" (click)="openModal()">launch</i></a>
-        
         <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-small-only" height="64" width="64"/>
         <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-med-and-up" height="56" width="56"/>
         <ul class="right hide-on-small-only">
@@ -35,13 +32,61 @@
     <h5 class="center">PUBLIC CHORDZ</h5>
     <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
         <li *ngFor="let publicChord of publicChords">
+            
             <div class="collapsible-header teal lighten-5"><strong>{{ publicChord.title }}</strong> by <em>{{ publicChord.email }}</em></div>
-            <div class="collapsible-body teal lighten-4"><p>Version: {{ publicChord.version }}<br/><br/>Chordz:<br/><br/><span [innerHTML]="publicChord.chordDoc"></span></p></div>
+            <div class="collapsible-body teal lighten-4">
+                <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped modal-trigger" id="fullscreenModeButton1" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode" (click)="openModal(publicChord._id)"><i id="fullscreenModeButton1Icon" class="material-icons center">launch</i></a>
+                <a class="btn-flat right hide-on-med-and-up modal-trigger" id="fullscreenModeButton2" (click)="openModal(publicChord._id)"><i id="fullscreenModeButton2Icon" class="material-icons center">launch</i></a>
+                
+                <p>Version: {{ publicChord.version }}<br/><br/>
+                Last Updated: {{ publicChord.lastUpdated }}<br/><br/>
+                Chordz:<br/><br/>
+                <span [innerHTML]="publicChord.chordDoc"></span>
+                </p>
+                
+                <!-- Modal Structure -->
+                <div [attr.id]="publicChord._id" class="modal" materialize="modal" [materializeActions]="modalActions">
+                    <h6 id="fullscreenNote" class="center hide-on-small-only">Press Esc to Exit Fullscreen Mode</h6>
+                    
+                    <div class="row center hide-on-med-and-up fullscreenExitButtonDiv">
+                        <div id="fullscreenExitButton" class="col s12" (click)="closeModal(publicChord._id)" >EXIT FULLSCREEN MODE</div>
+                    </div>
+                    
+                    <div id="publicChordz" class="modal-content" onmousedown='return false;' onselectstart='return false;'>
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <div class="row hide-on-small-only">
+                                    <div class="col s5">
+                                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                                        Version: {{ publicChord.version }}<br/><br/>
+                                        Last Updated: {{ publicChord.lastUpdated }}<br/><br/></p>
+                                    </div>
+                                    <div class="col s7">
+                                        <span [innerHTML]="publicChord.chordDoc"></span>
+                                    </div>
+                                </div>
+                                <div class="row hide-on-med-and-up">
+                                    <div class="col s12">
+                                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                                        Version: {{ publicChord.version }}<br/><br/>
+                                        Last Updated: {{ publicChord.lastUpdated }}<br/><br/>
+                                        Chordz:<br/><br/>
+                                        <span [innerHTML]="publicChord.chordDoc"></span></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>     
+                
+            </div>
+            
         </li>
     </ul>       
 </div>
 
-<!-- Modal Structure -->
+
+<!-- Modal Structure 
 <div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
     <h6 id="fullscreenNote" class="center hide-on-small-only">Press Esc to Exit Fullscreen Mode</h6>
     
@@ -117,7 +162,7 @@
             </li>
         </ul>
     </div>
-</div>
+</div> -->
 
 <div class="allFooters center">
     <a class="footers" href="/privacy-policy">Privacy Policy</a>

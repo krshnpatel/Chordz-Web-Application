@@ -7,6 +7,8 @@ import { ChordsService } from './chords.service.ts';
 
 import { MaterializeAction } from 'angular2-materialize';
 
+declare var $:any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -65,13 +67,14 @@ export class AppComponent {
       return true;
   }
   
-  openModal()
+  openModal(id)
   {
-    this.modalActions.emit({action:"modal",params:['open']});
+    $('#' + id).modal('open');
   }
   
-  closeModal()
+  closeModal(id)
   {
-    this.modalActions.emit({action:"modal",params:['close']});
+    //this.modalActions.emit({action:"modal",params:['close']});
+    $('#' + id).modal('close');
   }
 }
