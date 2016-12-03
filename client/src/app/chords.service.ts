@@ -8,7 +8,7 @@ let chordpro = require('chordprojs');
 
 @Injectable()
 export class ChordsService {
-   
+  
   constructor(private http: Http) {}
   
   getPublicChords()
@@ -53,7 +53,7 @@ export class ChordsService {
       .get('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', options)
       .map((response: Response) => response.json())
       .map((response) => {
-          console.log(response);
+          //console.log(response);
           
           let j = 0;
           let userChords = [];
@@ -77,7 +77,7 @@ export class ChordsService {
   
   postUserChord(email, title, version, chordDoc, isPublic)
   {
-    console.log(chordDoc);
+    //console.log(chordDoc);
     
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -88,7 +88,9 @@ export class ChordsService {
       return this.http
       .post('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
       .map((response: Response) => response.json())
-      .map((response) => { "Response = " + console.log(response);});
+      .map((response) => {
+        return response;
+      });
   }
   
   getRawUserChords(userEmail)
@@ -102,7 +104,7 @@ export class ChordsService {
       .get('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', options)
       .map((response: Response) => response.json())
       .map((response) => {
-          console.log(response);
+          //console.log(response);
           
           let j = 0;
           let userChords = [];
@@ -132,7 +134,7 @@ export class ChordsService {
     .put('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
     .map((response: Response) => response.json())
     .map((response) => {
-        console.log(response);
+        return response;
     });
   }
   
@@ -144,14 +146,39 @@ export class ChordsService {
     headers.append('Content-Type', 'application/json');
         
     let options = new RequestOptions({ headers: headers});
-    let body = JSON.stringify({ email: userEmail, title: title, version: version, isPublic: isPublic, isDelete: isDelete});
+    let body = JSON.stringify({ email: userEmail, title: title, version: version, isPublic: isPublic, isDelete: isDelete, newTitle: title});
     
     return this.http
     .put('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
     .map((response: Response) => response.json())
     .map((response) => {
-        console.log(response);
+        return response;
     });
+  }
+  
+  changeTitle(userEmail, title, version, chordDoc, isPublic, newTitle)
+  {
+    var isDelete = false;
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+        
+    let options = new RequestOptions({ headers: headers});
+    let body = JSON.stringify({ email: userEmail, title: title, version: version, chordDoc: chordDoc, isPublic: isPublic, isDelete: isDelete, newTitle: newTitle});
+    
+    return this.http
+    .put('https://se3316a-lab5-kpate222.c9users.io:8080/myapi/chord', body, options)
+    .map((response: Response) => response.json())
+    .map((response) => {
+        return response;
+    });
+  }
+  
+  extractTitle(chordDoc)
+  {
+    var parseResult = chordpro.parse(chordDoc);
+    var title = parseResult.title;
+    return title;
   }
 }
 

@@ -2,21 +2,17 @@
     background-color: #37474f;
 }
 
-li:hover {
-    background-color: #546e7a;
-}
-
 #localLogin, #socialLogin {
     border-right-style: solid;
     border-right-color: white;
 }
 
-#signUp, #myChordz {
+#signUp, #myChordz, #fullscreenMode, #fullscreenModeButton1 {
     border-left-style: solid;
     border-left-color: white;
 }
 
-.menuButton {
+.menuButton, #fullscreenExitButton {
     background-color: #37474f;
     color: white;
     padding: 10px;
@@ -41,4 +37,94 @@ li:hover {
 
 .collapsible-body {
     font-size: 18px;
+}
+
+#modal1 {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    top: 0% !important;
+    bottom: 0%;
+}
+
+.collection-header {
+    font-size: 35px;
+    background-color: #ce93d8;
+}
+
+.collection-item {
+    font-size: 15px;
+    background-color: #e1bee7;
+    border-bottom: 2px solid #64646f;
+}
+
+#fullscreenModeButton1Icon, #fullscreenModeButton1 {
+    color: white;
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+    height: 64px;
+    width: 64px;
+}
+
+#fullscreenModeButton2 {
+    color: white;
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+    height: 56px;
+    width: 56px;
+}
+
+#fullscreenPublicButton, #fullscreenPrivateButton {
+    padding: 0;
+    width: 48%;
+    height: 62px;
+    line-height: 60px;
+}
+
+#fullscreenPublicButton2, #fullscreenPrivateButton2 {
+    padding: 0;
+    width: 48%;
+    height: 54px;
+}
+
+.fullscreenTabs {
+    height: 62px;
+}
+
+.fullscreenTabs2 {
+    height: 54px;
+}
+
+#fullscreenNote {
+    font-size: 1.5rem;
+}
+
+.fullscreenExitButtonDiv {
+    margin-bottom: 0;
+}
+
+#fullscreenPrivateButton {
+    margin-right: 2%;
+}
+
+#fullscreenPublicButton {
+    margin-left: 2%;
+}
+
+.fullscreenTabsRow {
+    margin: 2%;
+}
+
+#fullscreenPrivateButtonText, #fullscreenPublicButtonText {
+    font-size: 22px;
+}
+
+.allFooters {
+    background-color: #bcaaa4;
+}
+
+.footers {
+    color: black;
 }

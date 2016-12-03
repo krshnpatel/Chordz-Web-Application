@@ -1,38 +1,128 @@
+<nav>
+    <div class="nav-wrapper mainNavbar">
+        <a href="" class="brand-logo center">CHORDZ</a>
+        
+        <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped" id="fullscreenModeButton1" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode"><i id="fullscreenModeButton1Icon" class="material-icons modal-trigger center" (click)="openModal()">launch</i></a>
+        <a class="btn-flat right hide-on-med-and-up" id="fullscreenModeButton2"><i id="fullscreenModeButton2Icon" class="material-icons modal-trigger center" (click)="openModal()">launch</i></a>
+        
+        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-small-only" height="64" width="64"/>
+        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-med-and-up" height="56" width="56"/>
+        <ul class="right hide-on-small-only">
+            <!-- <li id="signUp" class="active"><a *ngIf="!auth.authenticated()" href="#">SIGN UP</a></li> -->
+            <li id="myChordz"><a *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</a></li>
+        </ul>
+        <ul class="left hide-on-small-only">
+            <!-- <li id="localLogin"><a *ngIf="!auth.authenticated()" routerLink="/login" routerLinkActive="active">LOG IN</a></li> -->
+            <li id="socialLogin"><a *ngIf="!auth.authenticated()" (click)="auth.login()">LOG IN / SIGN UP</a></li>
+            <li id="socialLogin"><a *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row center hide-on-med-and-up">
+    <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" routerLink="/login">LOG IN</div> -->
+    <div class="col s12 menuButton" *ngIf="!auth.authenticated()" (click)="auth.login()" >LOG IN / SIGN UP</div>
+    <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" href="#">SIGN UP</div> -->
+    <div class="col s12 menuButton" *ngIf="auth.authenticated()" onclick="window.location.href = '/profile'">MY CHORDZ</div>
+    <div class="col s12 menuButton" *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</div>
+</div>
+
+<router-outlet></router-outlet>
+    
+<app-about *ngIf="!auth.authenticated() && checkRoute()"></app-about>
+    
+<div *ngIf="checkRoute()" class="container publicChords" onmousedown='return false;' onselectstart='return false;'>
+    <h5 class="center">PUBLIC CHORDZ</h5>
+    <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
+        <li *ngFor="let publicChord of publicChords">
+            <div class="collapsible-header teal lighten-5"><strong>{{ publicChord.title }}</strong> by <em>{{ publicChord.email }}</em></div>
+            <div class="collapsible-body teal lighten-4"><p>Version: {{ publicChord.version }}<br/><br/>Chordz:<br/><br/><span [innerHTML]="publicChord.chordDoc"></span></p></div>
+        </li>
+    </ul>       
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+    <h6 id="fullscreenNote" class="center hide-on-small-only">Press Esc to Exit Fullscreen Mode</h6>
+    
+    <div class="row center hide-on-med-and-up fullscreenExitButtonDiv">
+        <div id="fullscreenExitButton" class="col s12" (click)="closeModal()" >EXIT FULLSCREEN MODE</div>
+    </div>
+    
     <nav>
-        <div class="nav-wrapper mainNavbar">
-            <a href="" class="brand-logo center">CHORDZ</a>
-            <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-small-only" height="64" width="64"/>
-            <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-med-and-up" height="56" width="56"/>
-            <ul class="right hide-on-small-only">
-                <!-- <li id="signUp" class="active"><a *ngIf="!auth.authenticated()" href="#">SIGN UP</a></li> -->
-                <li id="myChordz"><a *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</a></li>
+        <div class="nav-wrapper purple darken-2 fullscreenNavbar">
+            <ul class="tabs tabs-transparent fullscreenTabs hide-on-small-only">
+                <li id="fullscreenPublicButton" class="btn-flat tab active"><a href="#publicChordz" id="fullscreenPublicButtonText">Public Chordz</a></li>
+                <li *ngIf="auth.authenticated() && auth.userProfile && getUserChordsApp()" id="fullscreenPrivateButton" class="btn-flat tab"><a href="#yourChordz" id="fullscreenPrivateButtonText">Your Chordz</a></li>
             </ul>
-            <ul class="left hide-on-small-only">
-                <!-- <li id="localLogin"><a *ngIf="!auth.authenticated()" routerLink="/login" routerLinkActive="active">LOG IN</a></li> -->
-                <li id="socialLogin"><a *ngIf="!auth.authenticated()" (click)="auth.login()">LOG IN / SIGN UP</a></li>
-                <li id="socialLogin"><a *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</a></li>
+            <ul class="tabs tabs-transparent fullscreenTabs2 hide-on-med-and-up">
+                <li id="fullscreenPublicButton2" class="btn-flat tab active"><a href="#publicChordz" id="fullscreenPublicButtonText">Public Chordz</a></li>
+                <li *ngIf="auth.authenticated() && auth.userProfile && getUserChordsApp()" id="fullscreenPrivateButton2" class="btn-flat tab"><a href="#yourChordz" id="fullscreenPrivateButtonText">Your Chordz</a></li>
             </ul>
         </div>
     </nav>
-
-    <div class="row center hide-on-med-and-up">
-        <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" routerLink="/login">LOG IN</div> -->
-        <div class="col s12 menuButton" *ngIf="!auth.authenticated()" (click)="auth.login()" >LOG IN / SIGN UP</div>
-        <!-- <div class="col s12 menuButton" *ngIf="!auth.authenticated()" href="#">SIGN UP</div> -->
-        <div class="col s12 menuButton" *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</div>
-        <div class="col s12 menuButton" *ngIf="auth.authenticated()" (click)="auth.logout()" href="">LOG OUT</div>
-    </div>
     
-    <router-outlet></router-outlet>
-    
-    <app-about *ngIf="!auth.authenticated() && checkRoute()"></app-about>
-    
-    <div *ngIf="checkRoute()" class="container publicChords">
-        <h5 class="center">PUBLIC CHORDZ</h5>
-        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
-            <li *ngFor="let publicChord of publicChords">
-                <div class="collapsible-header teal lighten-5"><strong>{{ publicChord.title }}</strong> by <em>{{ publicChord.email }}</em></div>
-                <div class="collapsible-body teal lighten-4"><p>Version: {{ publicChord.version }}<br/><br/>Chordz:<br/><br/><span [innerHTML]="publicChord.chordDoc"></span></p></div>
+    <div id="publicChordz" class="modal-content" onmousedown='return false;' onselectstart='return false;'>
+        <ul class="collection">
+            <li class="collection-header center">PUBLIC CHORDZ</li>
+            <li *ngFor="let publicChord of publicChords" class="collection-item">
+                <div class="row hide-on-small-only">
+                    <div class="col s5">
+                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                        Version: {{ publicChord.version }}<br/><br/>
+                        Last Updated: {{ publicChord.lastUpdated }}<br/><br/></p>
+                    </div>
+                    <div class="col s7">
+                        <span [innerHTML]="publicChord.chordDoc"></span>
+                    </div>
+                </div>
+                <div class="row hide-on-med-and-up">
+                    <div class="col s12">
+                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                        Version: {{ publicChord.version }}<br/><br/>
+                        Last Updated: {{ publicChord.lastUpdated }}<br/><br/>
+                        Chordz:<br/><br/>
+                        <span [innerHTML]="publicChord.chordDoc"></span></p>
+                    </div>
+                </div>
             </li>
-        </ul>       
+        </ul>
+    </div>  
+    
+    <div *ngIf="auth.authenticated() && auth.userProfile && getUserChordsApp()" id="yourChordz" class="modal-content" style="display: none">
+        <ul class="collection">
+            <li class="collection-header center">YOUR CHORDZ</li>
+            <li *ngFor="let userChord of userChords" class="collection-item">
+                <div class="row hide-on-small-only">
+                    <div class="col s5">
+                        <p>User Email: {{ this.auth.userProfile.email }}<br/><br/>
+                        Version: {{ userChord.version }}<br/><br/>
+                        Last Updated: {{ userChord.lastUpdated }}<br/><br/>
+                        Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/></p>
+                    </div>
+                    <div class="col s7">
+                        <span [innerHTML]="userChord.chordDoc"></span>
+                    </div>
+                </div>
+                <div class="row hide-on-med-and-up">
+                    <div class="col s12">
+                        <p>User Email: {{ this.auth.userProfile.email }}<br/><br/>
+                        Version: {{ userChord.version }}<br/><br/>
+                        Last Updated: {{ userChord.lastUpdated }}<br/><br/>
+                        Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/>
+                        Chordz:<br/><br/>
+                        <span [innerHTML]="userChord.chordDoc"></span></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
+</div>
+
+<div class="allFooters center">
+    <a class="footers" href="/privacy-policy">Privacy Policy</a>
+    <br/>
+    <a class="footers" href="/disclaimer">Disclaimer</a>
+    <br/>
+    <a class="footers" href="/terms-and-conditions"> Terms & Conditions</a>
+</div>
