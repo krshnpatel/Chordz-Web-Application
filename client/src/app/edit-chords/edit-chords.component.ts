@@ -32,29 +32,25 @@ export class EditChordsComponent implements OnInit {
     return true;
   }
   
-  saveChordSheet(version, chordDoc, isPublic)
+  saveChordSheet(chordDoc, isPublic)
   {
-    console.log("Save Chord Sheet");
-    
-    if (chordDoc.includes("{title:"))
+    if (chordDoc.includes("{title:") || chordDoc.includes("{t:"))
     {
-      var title = chordDoc.split("{title:");
-      var endIndex = chordDoc.search("}");
-      title = title[1].substr(0, endIndex - 7);
-      this.chordsService.postUserChord(this.auth.userProfile.email, title, version + 1, chordDoc, isPublic).subscribe((result) => {
+      var title = this.chordsService.extractTitle(chordDoc);
+      var version = 1;
+      
+      for (let i = 0; i < this.userChords.length; i++)
+      {
+        if (this.userChords[i].title == title)
+        {
+          version = version + 1;
+        }
+      }
+
+      this.chordsService.postUserChord(this.auth.userProfile.email, title, version, chordDoc, isPublic).subscribe((result) => {
         console.log("Result = " + result);
       });
       
-      window.location.reload();
-    }
-    else if (chordDoc.includes("{t:"))
-    {
-      var title = chordDoc.split("{t:");
-      var endIndex = chordDoc.search("}");
-      title = title[1].substr(0, endIndex - 3);
-      this.chordsService.postUserChord(this.auth.userProfile.email, title, version + 1, chordDoc, isPublic).subscribe((result) => {
-        console.log("Result = " + result);
-      });
       window.location.reload();
     }
     else
@@ -66,7 +62,7 @@ export class EditChordsComponent implements OnInit {
   clearChordSheet(chordTextArea)
   {
     console.log("Clear Chord Sheet");
-    if (confirm("Are you sure you want to clear the chordz?"))
+    if (confirm("Are you sure you want to clear the chord sheet?"))
     {
       chordTextArea.value = "";
     }

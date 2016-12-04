@@ -1,3 +1,7 @@
+.loginStatus {
+    margin-bottom: 3%;
+}
+
 .mainNavbar {
     background-color: #37474f;
 }
@@ -7,7 +11,7 @@
     border-right-color: white;
 }
 
-#signUp, #myChordz, #fullscreenMode { /* , #fullscreenModeButton1 { */
+#signUp, #myChordz {
     border-left-style: solid;
     border-left-color: white;
 }
@@ -28,7 +32,7 @@
 
 .publicChords {
     margin-bottom: 5%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .collapsible-header {
@@ -98,7 +102,6 @@
     width: 48%;
     height: 54px;
 }
-*/
 
 .fullscreenTabs {
     height: 62px;
@@ -107,6 +110,7 @@
 .fullscreenTabs2 {
     height: 54px;
 }
+*/
 
 #fullscreenNote {
     font-size: 1.5rem;
@@ -116,6 +120,7 @@
     margin-bottom: 0;
 }
 
+/*
 #fullscreenPrivateButton {
     margin-right: 2%;
 }
@@ -124,13 +129,10 @@
     margin-left: 2%;
 }
 
-.fullscreenTabsRow {
-    margin: 2%;
-}
-
 #fullscreenPrivateButtonText, #fullscreenPublicButtonText {
     font-size: 22px;
 }
+*/
 
 .allFooters {
     background-color: #bcaaa4;

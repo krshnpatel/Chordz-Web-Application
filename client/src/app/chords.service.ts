@@ -77,8 +77,6 @@ export class ChordsService {
   
   postUserChord(email, title, version, chordDoc, isPublic)
   {
-    //console.log(chordDoc);
-    
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
         

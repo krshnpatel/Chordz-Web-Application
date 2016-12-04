@@ -1,11 +1,12 @@
 <div *ngIf="auth.authenticated() && auth.userProfile && getUserChordsJson()">
     
+    <h6 class="center">Logged in as <strong>{{ auth.userProfile.email }}</strong></h6>
     <h5 class="center">EDIT YOUR CHORDZ</h5>
     
     <div class="container userChords">
         <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
              <li *ngFor="let userChord of userChords">
-                <div class="collapsible-header cyan lighten-3"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
+                <div class="collapsible-header cyan lighten-3"><strong>{{ userChord.title }}</strong> -> <em>Version {{ userChord.version }}</em></div>
                 <div class="collapsible-body cyan lighten-5">
                     <div class="row editForm">
                         <form class="col s12">
@@ -36,13 +37,13 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc>{{ userChord.chordDoc }}</textarea>
-                                    <label for="chordDoc" class="active">Chordz</label>
+                                    <label for="chordDoc" class="active">Chord Sheet</label>
                                 </div>
                             </div>
                         </form>
                         <div class="col s12 center formButtons">
-                            <button class="btn blue darken-3" (click)="saveChordSheet(userChord.version, chordDoc.value, isPublic.checked)"><i class="material-icons right">save</i>Save</button>
                             <button class="btn red darken-2" (click)="clearChordSheet(chordDoc)"><i class="material-icons right">clear</i>Clear</button>
+                            <button class="btn blue darken-3" (click)="saveChordSheet(chordDoc.value, userChord.isPublic)"><i class="material-icons right">save</i>Save</button>
                         </div>
                     </div>
                 </div>

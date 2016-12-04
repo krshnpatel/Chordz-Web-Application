@@ -41,6 +41,9 @@ router.get('/chord', function(req, res) {
 
 
 router.post('/chord', function(req, res) {
+    
+    console.log(req.body);
+    
     var chord = new Chord();
     chord.email = req.body.email;
     chord.title = req.body.title;
@@ -50,8 +53,6 @@ router.post('/chord', function(req, res) {
     
     var date = new Date();
     chord.lastUpdated = date.toLocaleString();
-    
-    //console.log(chord);
     
     Chord.find( { $and: [{'chordDoc': chord.chordDoc} , {'isPublic': true} , {'email': {$ne: chord.email} } ] }, function(err, foundChord) {
         
@@ -66,13 +67,11 @@ router.post('/chord', function(req, res) {
         }
         else
         {
-            res.json({message: true});
-            
             chord.save(function(err) {
                 if (err)
                     return res.send(err);
                     
-                res.json({ message: 'Chord created!' });
+                res.json({message: true});
             });
         }
     });

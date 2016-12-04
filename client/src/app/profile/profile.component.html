@@ -59,20 +59,10 @@
             <li *ngFor="let userChord of userChords">
                 <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
                 <div class="collapsible-body teal lighten-4">
-
-                    <!-- {{ getPrivacy(userChord.isPublic) }}<br/><br/> 
-                    <div class="row renamingDiv">
-                        <div class="col s6 newTitle">
-                            <div class="input-field">
-                                <input type="text" name="newTitle" [value]="userChord.title" #newTitle/>
-                                <label for="newTitle" class="active">New Title</label>
-                            </div>
-                        </div>
-                        <div class="col s4 renameButton center">
-                            <button class="btn blue darken-3" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, userChord.isPublic, newTitle)"><i class="material-icons right">create</i>Rename</button>
-                        </div>
-                    </div> -->
-
+                    
+                    <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped modal-trigger" id="fullscreenModeButton1User" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode" (click)="openModal('user' + userChord._id)"><i id="fullscreenModeButton1IconUser" class="material-icons center">launch</i></a>
+                    <a class="btn-flat right hide-on-med-and-up modal-trigger" id="fullscreenModeButton2User" (click)="openModal('user' + userChord._id)"><i id="fullscreenModeButton2IconUser" class="material-icons center">launch</i></a>
+                    
                     <p id="chordMetadata">Version: {{ userChord.version }}<br/><br/>
                     Author: {{ userChord.email }}<br/><br/>
                     Last Updated: {{ userChord.lastUpdated }}
@@ -90,13 +80,51 @@
                     Chord Sheet:<br/><br/>
                     <span [innerHTML]="userChord.chordDoc"></span></p>
                     
+                    <!-- Modal Structure for Full Screen -->
+                    <div [attr.id]="'user' + userChord._id" class="modal userChordModal" materialize="modal">
+                        <h6 id="fullscreenNote" class="center hide-on-small-only">Press Esc to Exit Fullscreen Mode</h6>
+                        
+                        <div class="row center hide-on-med-and-up fullscreenExitButtonDiv">
+                            <div id="fullscreenExitButton" class="col s12" (click)="closeModal('user' + userChord._id)" >EXIT FULLSCREEN MODE</div>
+                        </div>
+                        
+                        <div id="userChordz" class="modal-content" onmousedown='return false;' onselectstart='return false;'>
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <div class="row hide-on-small-only">
+                                        <div class="col s5 chordSheetInfo">
+                                            <p>Title: {{ userChord.title }} <br/><br/>
+                                            Version: {{ userChord.version }}<br/><br/>
+                                            Author: {{ userChord.email }}<br/><br/>
+                                            Last Updated: {{ userChord.lastUpdated }}<br/><br/></p>
+                                        </div>
+                                        <div class="col s7 chordSheet">
+                                            <span [innerHTML]="userChord.chordDoc"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row hide-on-med-and-up">
+                                        <div class="col s12">
+                                            <p>Title: {{ userChord.title }} <br/><br/>
+                                            Version: {{ userChord.version }}<br/><br/>
+                                            Author: {{ userChord.email }}<br/><br/>
+                                            Last Updated: {{ userChord.lastUpdated }}<br/><br/>
+                                            Chord Sheet:<br/><br/>
+                                            <span [innerHTML]="userChord.chordDoc"></span></p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>   
+                    
+                    
                     <div class="row center">
                         <div class="col s12 deleteButton">
                             <button class="btn red darken-2" (click)="deleteChordSheet(userChord.title, userChord.version)"><i class="material-icons right">delete</i>Delete</button>
                             <button class="btn blue darken-3 modal-trigger" (click)="openModal('rename' + userChord._id)"><i class="material-icons right">create</i>Rename</button>
                         </div>
                         
-                        <!-- Modal Structure -->
+                        <!-- Modal Structure for Renaming -->
                         <div [attr.id]="'rename' + userChord._id" class="modal" materialize="modal">
                             <div class="modal-content">
                                 <form>

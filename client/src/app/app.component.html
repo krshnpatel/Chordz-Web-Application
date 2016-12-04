@@ -2,8 +2,8 @@
     <div class="nav-wrapper mainNavbar">
         <a href="" class="brand-logo center">CHORDZ</a>
         
-        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-small-only" height="64" width="64"/>
-        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img left hide-on-med-and-up" height="56" width="56"/>
+        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-small-only" height="64" width="64"/>
+        <img *ngIf="auth.authenticated() && auth.userProfile" [src]="auth.userProfile.picture" alt="" class="profile-img right hide-on-med-and-up" height="56" width="56"/>
         <ul class="right hide-on-small-only">
             <!-- <li id="signUp" class="active"><a *ngIf="!auth.authenticated()" href="#">SIGN UP</a></li> -->
             <li id="myChordz"><a *ngIf="auth.authenticated()" href="/profile">MY CHORDZ</a></li>
@@ -29,6 +29,9 @@
 <app-about *ngIf="!auth.authenticated() && checkRoute()"></app-about>
     
 <div *ngIf="checkRoute()" class="container publicChords" onmousedown='return false;' onselectstart='return false;'>
+    
+    <h6 class="center loginStatus">Logged in as <strong>{{ auth.userProfile.email }}</strong></h6>
+    
     <h5 class="center">PUBLIC CHORDZ</h5>
     <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
         <li *ngFor="let publicChord of publicChords">
@@ -54,7 +57,7 @@
                         <div id="fullscreenExitButton" class="col s12" (click)="closeModal(publicChord._id)" >EXIT FULLSCREEN MODE</div>
                     </div>
                     
-                    <div id="publicChordz" class="modal-content" onmousedown='return false;' onselectstart='return false;'>
+                    <div class="modal-content" onmousedown='return false;' onselectstart='return false;'>
                         <ul class="collection">
                             <li class="collection-item">
                                 <div class="row hide-on-small-only">
