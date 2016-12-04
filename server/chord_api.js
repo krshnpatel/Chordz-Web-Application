@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 
+var validator = require('validator');
+
 var Chord = require('./app/models/chord');
 
 router.get('/chord', function(req, res) {
@@ -50,6 +52,12 @@ router.post('/chord', function(req, res) {
     chord.version = req.body.version;
     chord.chordDoc = req.body.chordDoc;
     chord.isPublic = req.body.isPublic;
+    
+    console.log(chord.chordDoc);
+    
+    chord.chordDoc = validator.unescape(chord.chordDoc);
+    
+    console.log(chord.chordDoc);
     
     var date = new Date();
     chord.lastUpdated = date.toLocaleString();
