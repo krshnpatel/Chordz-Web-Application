@@ -5,7 +5,9 @@ import { AppComponent } from '../app.component';
 import { Auth } from '../auth.service';
 import { ChordsService } from '../chords.service';
 
-import { MaterializeAction } from 'angular2-materialize';
+//import { MaterializeAction } from 'angular2-materialize';
+
+declare var $:any;
 
 let chordpro = require('chordprojs');
 
@@ -21,7 +23,7 @@ export class ProfileComponent implements OnInit {
   userChords;
   rawUserChords;
   
-  modal2Actions = new EventEmitter<string|MaterializeAction>();
+  //modal2Actions = new EventEmitter<string|MaterializeAction>();
   
   constructor(private auth: Auth, private chordsService: ChordsService, private appComponent: AppComponent) {}
 
@@ -102,6 +104,8 @@ export class ProfileComponent implements OnInit {
   
   renameChordSheet(title, version, chordDoc, isPublic, newTitle)
   {
+    console.log(title);
+    
     var rawChordDoc;
     
     for (let i = 0; i < this.rawUserChords.length; i++)
@@ -133,5 +137,15 @@ export class ProfileComponent implements OnInit {
     }
     
     newTitle.value = "";
+  }
+  
+  openModal(id)
+  {
+    $('#' + id).modal('open');
+  }
+  
+  closeModal(id)
+  {
+    $('#' + id).modal('close');
   }
 }

@@ -53,31 +53,39 @@
 }
 
 .collection-item {
-    font-size: 15px;
+    font-size: large;
     background-color: #e1bee7;
-    border-bottom: 2px solid #64646f;
+    line-height: inherit;
+}
+
+
+.chordSheet {
+    padding: 2rem;
+    border-left-color: #e1bee7;
+    border-left-style: inset;
+}
+
+.chordSheetInfo {
+    padding: 1rem;
+}
+
+#fullscreenModeButton1Icon, #fullscreenModeButton1 {
+    font-size: 3rem;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    padding: 0;
+}
+
+#fullscreenModeButton2, #fullscreenModeButton2Icon {
+    font-size: 2.5rem;
+    line-height: 40px;
+    padding: 0;
+    height: 40px;
+    width: 40px;
 }
 
 /*
-#fullscreenModeButton1Icon, #fullscreenModeButton1 {
-    color: white;
-    font-size: 3rem;
-    padding: 0;
-    margin: 0;
-    height: 64px;
-    width: 64px;
-}
-
-#fullscreenModeButton2 {
-    color: white;
-    font-size: 3rem;
-    padding: 0;
-    margin: 0;
-    height: 56px;
-    width: 56px;
-}
-*/
-
 #fullscreenPublicButton, #fullscreenPrivateButton {
     padding: 0;
     width: 48%;
@@ -90,6 +98,7 @@
     width: 48%;
     height: 54px;
 }
+*/
 
 .fullscreenTabs {
     height: 62px;

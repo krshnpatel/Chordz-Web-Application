@@ -38,14 +38,16 @@
                 <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped modal-trigger" id="fullscreenModeButton1" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode" (click)="openModal(publicChord._id)"><i id="fullscreenModeButton1Icon" class="material-icons center">launch</i></a>
                 <a class="btn-flat right hide-on-med-and-up modal-trigger" id="fullscreenModeButton2" (click)="openModal(publicChord._id)"><i id="fullscreenModeButton2Icon" class="material-icons center">launch</i></a>
                 
-                <p>Version: {{ publicChord.version }}<br/><br/>
+                <p>Title: {{ publicChord.title }}<br/><br/>
+                Version: {{ publicChord.version }}<br/><br/>
+                Author: {{ publicChord.email }}<br/><br/>
                 Last Updated: {{ publicChord.lastUpdated }}<br/><br/>
-                Chordz:<br/><br/>
+                Chord Sheet:<br/><br/>
                 <span [innerHTML]="publicChord.chordDoc"></span>
                 </p>
                 
                 <!-- Modal Structure -->
-                <div [attr.id]="publicChord._id" class="modal" materialize="modal" [materializeActions]="modalActions">
+                <div [attr.id]="publicChord._id" class="modal" materialize="modal">
                     <h6 id="fullscreenNote" class="center hide-on-small-only">Press Esc to Exit Fullscreen Mode</h6>
                     
                     <div class="row center hide-on-med-and-up fullscreenExitButtonDiv">
@@ -56,21 +58,23 @@
                         <ul class="collection">
                             <li class="collection-item">
                                 <div class="row hide-on-small-only">
-                                    <div class="col s5">
-                                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                                    <div class="col s5 chordSheetInfo">
+                                        <p>Title: {{ publicChord.title }} <br/><br/>
                                         Version: {{ publicChord.version }}<br/><br/>
+                                        Author: {{ publicChord.email }}<br/><br/>
                                         Last Updated: {{ publicChord.lastUpdated }}<br/><br/></p>
                                     </div>
-                                    <div class="col s7">
+                                    <div class="col s7 chordSheet">
                                         <span [innerHTML]="publicChord.chordDoc"></span>
                                     </div>
                                 </div>
                                 <div class="row hide-on-med-and-up">
                                     <div class="col s12">
-                                        <p>User Email: {{ publicChord.email }}<br/><br/>
+                                        <p>Title: {{ publicChord.title }} <br/><br/>
                                         Version: {{ publicChord.version }}<br/><br/>
+                                        Author: {{ publicChord.email }}<br/><br/>
                                         Last Updated: {{ publicChord.lastUpdated }}<br/><br/>
-                                        Chordz:<br/><br/>
+                                        Chord Sheet:<br/><br/>
                                         <span [innerHTML]="publicChord.chordDoc"></span></p>
                                     </div>
                                 </div>

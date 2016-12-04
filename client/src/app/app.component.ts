@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Auth } from './auth.service.ts';
 import { ChordsService } from './chords.service.ts';
 
-import { MaterializeAction } from 'angular2-materialize';
+//import { MaterializeAction } from 'angular2-materialize';
 
 declare var $:any;
 
@@ -18,7 +18,7 @@ declare var $:any;
 
 export class AppComponent {
   
-  modalActions = new EventEmitter<string|MaterializeAction>();
+  //modalActions = new EventEmitter<string|MaterializeAction>();
   title = 'CHORDZ';
   publicChords;
   userChords;
@@ -74,7 +74,6 @@ export class AppComponent {
   
   closeModal(id)
   {
-    //this.modalActions.emit({action:"modal",params:['close']});
     $('#' + id).modal('close');
   }
 }

@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc></textarea>
-                                    <label for="chordDoc">Chordz</label>
+                                    <label for="chordDoc">Chord Sheet</label>
                                 </div>
                             </div>
                         </form>
@@ -60,20 +60,21 @@
                 <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
                 <div class="collapsible-body teal lighten-4">
 
-                    <!-- {{ getPrivacy(userChord.isPublic) }}<br/><br/> -->
+                    <!-- {{ getPrivacy(userChord.isPublic) }}<br/><br/> 
                     <div class="row renamingDiv">
-                        <div class="col s8 newTitle">
+                        <div class="col s6 newTitle">
                             <div class="input-field">
                                 <input type="text" name="newTitle" [value]="userChord.title" #newTitle/>
                                 <label for="newTitle" class="active">New Title</label>
                             </div>
                         </div>
-                        <div class="col s4 renameButton">
+                        <div class="col s4 renameButton center">
                             <button class="btn blue darken-3" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, userChord.isPublic, newTitle)"><i class="material-icons right">create</i>Rename</button>
                         </div>
-                    </div>
+                    </div> -->
 
                     <p id="chordMetadata">Version: {{ userChord.version }}<br/><br/>
+                    Author: {{ userChord.email }}<br/><br/>
                     Last Updated: {{ userChord.lastUpdated }}
                     </p>
                     <div class="switch" id="publicSwitch">
@@ -86,34 +87,36 @@
                         </label>
                     </div>
                     <p>
-                    Chordz:<br/><br/>
+                    Chord Sheet:<br/><br/>
                     <span [innerHTML]="userChord.chordDoc"></span></p>
                     
                     <div class="row center">
                         <div class="col s12 deleteButton">
                             <button class="btn red darken-2" (click)="deleteChordSheet(userChord.title, userChord.version)"><i class="material-icons right">delete</i>Delete</button>
-                            <!-- <button class="btn blue darken-3 modal-trigger" (click)="openModal2()"><i class="material-icons right">create</i>Rename</button> -->
+                            <button class="btn blue darken-3 modal-trigger" (click)="openModal('rename' + userChord._id)"><i class="material-icons right">create</i>Rename</button>
                         </div>
+                        
+                        <!-- Modal Structure -->
+                        <div [attr.id]="'rename' + userChord._id" class="modal" materialize="modal">
+                            <div class="modal-content">
+                                <form>
+                                    <div class="input-field">
+                                        <input type="text" name="newTitle" #newTitle/>
+                                        <label for="newTitle">New Title</label>
+                                    </div>
+                                </form>
+                                <div class="row center">
+                                    <div class="col s12">
+                                        <button class="btn" (click)="closeModal('rename' + userChord._id)"><i class="material-icons right">clear</i>Cancel</button>
+                                        <button class="btn" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, isPublic.checked, newTitle)"><i class="material-icons right">done</i>Confirm</button>                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
+                    
                 </div>
-                
-                <!-- Modal Structure 
-                <div id="modal2" class="modal" materialize="modal" [materializeActions]="modal2Actions">
-                    <div class="modal-content">
-                        <form>
-                            <div class="input-field">
-                                <input type="text" name="newTitle" #newTitle/>
-                                <label for="newTitle">New Title</label>
-                            </div>
-                        </form>
-                        <div class="row center">
-                            <div class="col s12">
-                                <button class="btn" (click)="closeModal2()"><i class="material-icons right">clear</i>Cancel</button>
-                                <button class="btn" (click)="renameChordSheet(this.userChord.title, this.userChord.version, isPublic.checked, newTitle)"><i class="material-icons right">done</i>Confirm</button>                
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </li>
         </ul>
     </div>
