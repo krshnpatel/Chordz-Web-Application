@@ -67,6 +67,44 @@ export class EditChordsComponent implements OnInit {
       chordTextArea.value = "";
     }
   }
+  
+  getPrivacy(isPublic)
+  {
+    if (isPublic)
+      return "public";
+    else
+      return "private";
+  }
+  
+  checkStartBraces(chordDoc)
+  {
+    
+  }
+  
+  checkEndBraces(chordDoc)
+  {
+    
+  }
+  
+  checkForTitle(chordDoc)
+  {
+    
+  }
+  
+  checkForMultipleTitles(chordDoc)
+  {
+    
+  }
+  
+  checkForDirectives(chordDoc)
+  {
+    
+  }
+  
+  checkForExtraCharacters(chordDoc)
+  {
+    
+  }
 }
 
 

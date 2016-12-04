@@ -96,6 +96,7 @@
                                             <p>Title: {{ userChord.title }} <br/><br/>
                                             Version: {{ userChord.version }}<br/><br/>
                                             Author: {{ userChord.email }}<br/><br/>
+                                            Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/>
                                             Last Updated: {{ userChord.lastUpdated }}<br/><br/></p>
                                         </div>
                                         <div class="col s7 chordSheet">
@@ -107,6 +108,7 @@
                                             <p>Title: {{ userChord.title }} <br/><br/>
                                             Version: {{ userChord.version }}<br/><br/>
                                             Author: {{ userChord.email }}<br/><br/>
+                                            Privacy: {{ getPrivacy(userChord.isPublic) }}<br/><br/>
                                             Last Updated: {{ userChord.lastUpdated }}<br/><br/>
                                             Chord Sheet:<br/><br/>
                                             <span [innerHTML]="userChord.chordDoc"></span></p>

@@ -30,7 +30,7 @@
     
 <div *ngIf="checkRoute()" class="container publicChords" onmousedown='return false;' onselectstart='return false;'>
     
-    <h6 class="center loginStatus">Logged in as <strong>{{ auth.userProfile.email }}</strong></h6>
+    <h6 *ngIf="auth.authenticated() && auth.userProfile" class="center loginStatus">Logged in as <strong>{{ auth.userProfile.email }}</strong></h6>
     
     <h5 class="center">PUBLIC CHORDZ</h5>
     <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">

@@ -21,8 +21,11 @@
                                 </div>
                             </div> -->
                             <div class="row lastUpdatedAndVersion">
-                                <div class="col s6 center">
+                                <div class="col s3 center">
                                     <p>Version: {{ userChord.version }}</p> 
+                                </div>
+                                <div class="col s3 center">
+                                    <p>Privacy: {{ getPrivacy(userChord.isPublic) }}</p> 
                                 </div>
                                 <div class="col s6 center">
                                     <p>Last Updated: {{ userChord.lastUpdated }}</p> 
