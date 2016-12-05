@@ -48,7 +48,7 @@ app.use(function (req, res, next) {
     // Request methods that are allowed
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers allowed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Cache-Control');
     res.setHeader('Access-Control-Allow-Credentials', true);
     // Passing to next layer of the middleware software
     next();
