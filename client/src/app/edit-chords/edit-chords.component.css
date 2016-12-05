@@ -10,10 +10,6 @@ h5 {
     margin-top: 3%;
 }
 
-#publicSwitch {
-    margin-top: 3%;
-}
-
 .editForm {
     padding: 2%;
 }
@@ -28,4 +24,8 @@ h5 {
 
 .lastUpdatedAndVersion {
     font-size: 1rem;
+}
+
+.clearButton, .saveButton {
+    margin-top: 7px;
 }

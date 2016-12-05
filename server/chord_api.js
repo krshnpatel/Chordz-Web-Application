@@ -7,40 +7,15 @@ var validator = require('validator');
 var Chord = require('./app/models/chord');
 
 router.get('/chord', function(req, res) {
+    
     Chord.find(function(err, chords) {
         if (err)
             return res.send(err);
-            
-        //console.log(chords);
+
         res.json(chords);
     });
+    
 });
-
-
-/*router.put('/chord/:chord_id', function(req, res) {
-    // use our chord model to find the chord we want
-    Chord.findById(req.params.chord_id, function(err, chord) {
-        if (err)
-            return res.send(err);
-            
-        chord.title = req.body.title;
-        chord.version = req.body.version;
-        chord.chordDoc = req.body.chordDoc;
-        chord.isPublic = req.body.isPublic;
-        
-        var date = new Date();
-        chord.lastUpdated = date.toLocaleString();
-
-        // save the chord
-        chord.save(function(err) {
-            if (err)
-                return res.send(err);
-            
-            res.json({ message: 'Chord updated!' });
-        });
-    });
-});*/
-
 
 router.post('/chord', function(req, res) {
     
@@ -52,12 +27,8 @@ router.post('/chord', function(req, res) {
     chord.version = req.body.version;
     chord.chordDoc = req.body.chordDoc;
     chord.isPublic = req.body.isPublic;
-    
-    console.log(chord.chordDoc);
-    
+
     chord.chordDoc = validator.unescape(chord.chordDoc);
-    
-    console.log(chord.chordDoc);
     
     var date = new Date();
     chord.lastUpdated = date.toLocaleString();
@@ -82,6 +53,7 @@ router.post('/chord', function(req, res) {
                 res.json({message: true});
             });
         }
+        
     });
 });
 
@@ -111,9 +83,8 @@ router.put('/chord', function(req, res) {
         console.log("not delete");
         console.log(req.body.email + " -- " + req.body.title + " -- " + req.body.version + " -- " + req.body.isPublic + " -- " + req.body.newTitle);
         
-        Chord.find({
-        email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord)
-        {
+        Chord.find({ email: req.body.email, title: req.body.title, version: req.body.version }, function(err, chord) {
+            
             if (err || chord.length == 0)
             {
                 console.log("error");
@@ -150,17 +121,6 @@ router.put('/chord', function(req, res) {
             }
         });
     }
-    
-    /**/
-});
-
-router.get('/chord/:chord_id', function(req, res) {
-    Chord.findById(req.params.chord_id, function(err, chord) {
-        if (err)
-            return res.send(err);
-        
-        res.json(chord);
-    });
 });
 
 module.exports = router;

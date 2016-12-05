@@ -2,16 +2,25 @@
     margin-bottom: 3%;
 }
 
+.chordzLogo {
+    margin-right: 0 !important;
+    font-size: 50px;
+}
+
 .mainNavbar {
     background-color: #37474f;
 }
 
-#localLogin, #socialLogin {
+#publicChordEmail {
+    overflow-wrap: break-word;
+}
+
+#loginAndSignUpButtons {
     border-right-style: solid;
     border-right-color: white;
 }
 
-#signUp, #myChordz {
+#myChordz {
     border-left-style: solid;
     border-left-color: white;
 }
@@ -89,29 +98,6 @@
     width: 40px;
 }
 
-/*
-#fullscreenPublicButton, #fullscreenPrivateButton {
-    padding: 0;
-    width: 48%;
-    height: 62px;
-    line-height: 60px;
-}
-
-#fullscreenPublicButton2, #fullscreenPrivateButton2 {
-    padding: 0;
-    width: 48%;
-    height: 54px;
-}
-
-.fullscreenTabs {
-    height: 62px;
-}
-
-.fullscreenTabs2 {
-    height: 54px;
-}
-*/
-
 #fullscreenNote {
     font-size: 1.5rem;
 }
@@ -119,20 +105,6 @@
 .fullscreenExitButtonDiv {
     margin-bottom: 0;
 }
-
-/*
-#fullscreenPrivateButton {
-    margin-right: 2%;
-}
-
-#fullscreenPublicButton {
-    margin-left: 2%;
-}
-
-#fullscreenPrivateButtonText, #fullscreenPublicButtonText {
-    font-size: 22px;
-}
-*/
 
 .allFooters {
     background-color: #bcaaa4;

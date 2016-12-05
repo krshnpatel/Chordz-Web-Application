@@ -7,19 +7,10 @@
         <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
              <li *ngFor="let userChord of userChords">
                 <div class="collapsible-header cyan lighten-3"><strong>{{ userChord.title }}</strong> -> <em>Version {{ userChord.version }}</em></div>
+                
                 <div class="collapsible-body cyan lighten-5">
                     <div class="row editForm">
                         <form class="col s12">
-                            <!-- <div class="row center">
-                                <div class="switch" id="publicSwitch">
-                                    <label>
-                                        Private
-                                        <input type="checkbox" [checked]="userChord.isPublic" #isPublic>
-                                        <span class="lever"></span>
-                                        Public
-                                    </label>
-                                </div>
-                            </div> -->
                             <div class="row lastUpdatedAndVersion">
                                 <div class="col s3 center">
                                     <p>Version: {{ userChord.version }}</p> 
@@ -31,12 +22,6 @@
                                     <p>Last Updated: {{ userChord.lastUpdated }}</p> 
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" [value]="userChord.title" #title>
-                                    <label for="title" class="active">Title</label>
-                                </div>
-                            </div> -->
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc>{{ userChord.chordDoc }}</textarea>
@@ -44,13 +29,16 @@
                                 </div>
                             </div>
                         </form>
+                        
                         <div class="col s12 center formButtons">
-                            <button class="btn red darken-2" (click)="clearChordSheet(chordDoc)"><i class="material-icons right">clear</i>Clear</button>
-                            <button class="btn blue darken-3" (click)="saveChordSheet(chordDoc.value, userChord.isPublic)"><i class="material-icons right">save</i>Save</button>
+                            <button class="btn red darken-2 clearButton" (click)="clearChordSheet(chordDoc)"><i class="material-icons right">clear</i>Clear</button>
+                            <button class="btn blue darken-3 saveButton" (click)="saveChordSheet(chordDoc.value, userChord.isPublic)"><i class="material-icons right">save</i>Save</button>
                         </div>
                     </div>
                 </div>
+                
             </li>
         </ul>       
     </div>
+    
 </div>

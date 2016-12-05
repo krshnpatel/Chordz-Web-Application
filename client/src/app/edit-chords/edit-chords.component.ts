@@ -19,6 +19,7 @@ export class EditChordsComponent implements OnInit {
   ngOnInit() {
   }
   
+  
   getUserChordsJson() 
   {
     if (this.counter == 1)
@@ -30,43 +31,49 @@ export class EditChordsComponent implements OnInit {
     
     this.counter++;
     return true;
-  }
+  } // End of getUserChordsJson
+  
   
   saveChordSheet(chordDoc, isPublic)
   {
-    if (chordDoc.includes("{title:") || chordDoc.includes("{t:"))
+    if (this.chordsService.checkStartBraces(chordDoc) && this.chordsService.checkEndBraces(chordDoc) && this.chordsService.checkForMultipleStartingBraceOnSameLine(chordDoc) && this.chordsService.checkForMultipleEndingBraceOnSameLine(chordDoc) && this.chordsService.checkForMultipleTitles(chordDoc) && this.chordsService.checkForDirectives(chordDoc) && this.chordsService.checkForWarnings(chordDoc))
     {
-      var title = this.chordsService.extractTitle(chordDoc);
-      var version = 1;
       
-      for (let i = 0; i < this.userChords.length; i++)
+      if (chordDoc.includes("{title:") || chordDoc.includes("{t:"))
       {
-        if (this.userChords[i].title == title)
+        var title = this.chordsService.extractTitle(chordDoc);
+        var version = 1;
+        
+        for (let i = 0; i < this.userChords.length; i++)
         {
-          version = version + 1;
+          if (this.userChords[i].title == title)
+          {
+            version = version + 1;
+          }
         }
+  
+        this.chordsService.postUserChord(this.auth.userProfile.email, title, version, chordDoc, isPublic).subscribe((result) => {
+          window.location.reload();
+        });
+        
       }
-
-      this.chordsService.postUserChord(this.auth.userProfile.email, title, version, chordDoc, isPublic).subscribe((result) => {
-        console.log("Result = " + result);
-      });
+      else
+      {
+        alert("Please specify a title using {title: yourTitle} or {t: yourTitle} in the chord sheet.");
+      }
       
-      window.location.reload();
     }
-    else
-    {
-      alert("Please specify a title using {title: yourTitle} or {t: yourTitle} in the chord sheet.");
-    }
-  }
+  } // End of saveChordSheet
+  
   
   clearChordSheet(chordTextArea)
   {
-    console.log("Clear Chord Sheet");
     if (confirm("Are you sure you want to clear the chord sheet?"))
     {
       chordTextArea.value = "";
     }
-  }
+  } // End of clearChordSheet
+  
   
   getPrivacy(isPublic)
   {
@@ -74,37 +81,9 @@ export class EditChordsComponent implements OnInit {
       return "public";
     else
       return "private";
-  }
+  } // End of getPrivacy
   
-  checkStartBraces(chordDoc)
-  {
-    
-  }
   
-  checkEndBraces(chordDoc)
-  {
-    
-  }
-  
-  checkForTitle(chordDoc)
-  {
-    
-  }
-  
-  checkForMultipleTitles(chordDoc)
-  {
-    
-  }
-  
-  checkForDirectives(chordDoc)
-  {
-    
-  }
-  
-  checkForExtraCharacters(chordDoc)
-  {
-    
-  }
 }
 
 

@@ -44,24 +44,16 @@ h4, h5 {
     text-align: left;
 }
 
-
-.deleteButton {
+.deleteRenameButtons {
     margin-bottom: 3%;
+}
+
+.deleteButton, .renameButton {
+    margin-top: 7px;
 }
 
 h6 {
     margin-bottom: 2%;
-}
-
-/*
-.renamingDiv {
-    margin-right: 0.75rem;
-    margin-left: 0.75rem;
-}
-*/
-
-.newTitle {
-    margin-top: 0.75rem;
 }
 
 #fullscreenModeButton1IconUser, #fullscreenModeButton1User {

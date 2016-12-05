@@ -3,12 +3,14 @@
     <h4 class="center">Welcome {{auth.userProfile.name}}!</h4>
     
     <div class="container">
-        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion"> <!-- onclick="$(document).ready(function(){ $('.collapsible').collapsible(); });" -->
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
              <li>
                 <div class="collapsible-header cyan lighten-3">CREATE CHORDZ</div>
+                
                 <div class="collapsible-body cyan lighten-5">
                     <div class="row createForm">
                         <form class="col s12">
+                            
                             <div class="row center">
                                 <div class="switch" id="publicSwitchCreate">
                                     <label id="switchLabels">
@@ -19,25 +21,16 @@
                                     </label>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" #title>
-                                    <label for="title">Title</label>
-                                </div>
-                            </div> 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="version" type="number" class="validate" #version>
-                                    <label for="version">Version</label>
-                                </div>
-                            </div> -->                           
+                            
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea id="chordDoc" type="text" class="materialize-textarea validate" #chordDoc></textarea>
                                     <label for="chordDoc">Chord Sheet</label>
                                 </div>
                             </div>
+                            
                         </form>
+                        
                         <div class="col s12 center createButton">
                             <button class="btn" (click)="createChordSheet(isPublic.checked, chordDoc.value)"><i class="material-icons right">add</i>Create</button>
                         </div>
@@ -52,21 +45,24 @@
     </div>
 
     <h5 class="center">YOUR CHORDZ</h5>
-    <h6 class="center"><strong>NOTE:</strong> If your newly created chord sheet does not show then you might have an error in your chord sheet. Check out <a href="/profile/errors">this</a> page for more details.</h6>
     
     <div class="container userChords">
         <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
             <li *ngFor="let userChord of userChords">
-                <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> by <em>{{ userChord.email }}</em></div>
+                
+                <div class="collapsible-header teal lighten-5"><strong>{{ userChord.title }}</strong> -> <em>Version {{ userChord.version }}</em></div>
+                
                 <div class="collapsible-body teal lighten-4">
                     
                     <a materialize="tooltip" class="btn-flat right hide-on-small-only tooltipped modal-trigger" id="fullscreenModeButton1User" data-position="left" data-delay="50" data-tooltip="Fullscreen Mode" (click)="openModal('user' + userChord._id)"><i id="fullscreenModeButton1IconUser" class="material-icons center">launch</i></a>
                     <a class="btn-flat right hide-on-med-and-up modal-trigger" id="fullscreenModeButton2User" (click)="openModal('user' + userChord._id)"><i id="fullscreenModeButton2IconUser" class="material-icons center">launch</i></a>
                     
-                    <p id="chordMetadata">Version: {{ userChord.version }}<br/><br/>
-                    Author: {{ userChord.email }}<br/><br/>
-                    Last Updated: {{ userChord.lastUpdated }}
+                    <p id="chordMetadata">
+                        Version: {{ userChord.version }}<br/><br/>
+                        Author: {{ userChord.email }}<br/><br/>
+                        Last Updated: {{ userChord.lastUpdated }}
                     </p>
+                    
                     <div class="switch" id="publicSwitch">
                         Privacy:
                         <label id="switchLabels">
@@ -76,9 +72,11 @@
                             Public
                         </label>
                     </div>
+                    
                     <p>
-                    Chord Sheet:<br/><br/>
-                    <span [innerHTML]="userChord.chordDoc"></span></p>
+                        Chord Sheet:<br/><br/>
+                        <span [innerHTML]="userChord.chordDoc"></span>
+                    </p>
                     
                     <!-- Modal Structure for Full Screen -->
                     <div [attr.id]="'user' + userChord._id" class="modal userChordModal" materialize="modal">
@@ -91,6 +89,7 @@
                         <div id="userChordz" class="modal-content" onmousedown='return false;' onselectstart='return false;'>
                             <ul class="collection">
                                 <li class="collection-item">
+                                    
                                     <div class="row hide-on-small-only">
                                         <div class="col s5 chordSheetInfo">
                                             <p>Title: {{ userChord.title }} <br/><br/>
@@ -103,6 +102,7 @@
                                             <span [innerHTML]="userChord.chordDoc"></span>
                                         </div>
                                     </div>
+                                    
                                     <div class="row hide-on-med-and-up">
                                         <div class="col s12">
                                             <p>Title: {{ userChord.title }} <br/><br/>
@@ -114,41 +114,48 @@
                                             <span [innerHTML]="userChord.chordDoc"></span></p>
                                         </div>
                                     </div>
+                                    
                                 </li>
                             </ul>
                         </div>
+                        
                     </div>   
                     
-                    
                     <div class="row center">
-                        <div class="col s12 deleteButton">
-                            <button class="btn red darken-2" (click)="deleteChordSheet(userChord.title, userChord.version)"><i class="material-icons right">delete</i>Delete</button>
-                            <button class="btn blue darken-3 modal-trigger" (click)="openModal('rename' + userChord._id)"><i class="material-icons right">create</i>Rename</button>
+                        
+                        <div class="col s12 deleteRenameButtons">
+                            <button class="btn red darken-2 deleteButton" (click)="deleteChordSheet(userChord.title, userChord.version)"><i class="material-icons right">delete</i>Delete</button>
+                            <button class="btn blue darken-3 modal-trigger renameButton" (click)="openModal('rename' + userChord._id)"><i class="material-icons right">create</i>Rename</button>
                         </div>
                         
                         <!-- Modal Structure for Renaming -->
                         <div [attr.id]="'rename' + userChord._id" class="modal" materialize="modal">
                             <div class="modal-content">
+                                
                                 <form>
                                     <div class="input-field">
                                         <input type="text" name="newTitle" #newTitle/>
                                         <label for="newTitle">New Title</label>
                                     </div>
                                 </form>
+                                
                                 <div class="row center">
                                     <div class="col s12">
                                         <button class="btn" (click)="closeModal('rename' + userChord._id)"><i class="material-icons right">clear</i>Cancel</button>
                                         <button class="btn" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, isPublic.checked, newTitle)"><i class="material-icons right">done</i>Confirm</button>                
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                         
                     </div>
                     
                 </div>
+                
             </li>
         </ul>
     </div>
+    
 </div>
 

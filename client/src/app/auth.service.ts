@@ -1,10 +1,7 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 
-// Avoid name not found warnings
-//declare var Auth0Lock: any;
 let Auth0 = require('auth0-lock').default;
-
 
 var options = {
   auth: {
@@ -49,11 +46,13 @@ export class Auth {
     });
   }
 
+
   public login()
   {
     // Call the show method to display the widget.
     this.lock.show();
   };
+
 
   public authenticated()
   {
@@ -62,14 +61,16 @@ export class Auth {
     return tokenNotExpired();
   };
 
+
   public logout()
   {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     this.userProfile = undefined;
-    //this.lock.logout({returnTo: 'https://se3316a-lab5-kpate222.c9users.io:8081'}, {version: 'v2'});
   };
+  
+  
 }
 
 

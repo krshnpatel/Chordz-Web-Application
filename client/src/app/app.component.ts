@@ -1,11 +1,8 @@
-import { Component, EventEmitter } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Auth } from './auth.service.ts';
 import { ChordsService } from './chords.service.ts';
-
-//import { MaterializeAction } from 'angular2-materialize';
 
 declare var $:any;
 
@@ -18,25 +15,18 @@ declare var $:any;
 
 export class AppComponent {
   
-  //modalActions = new EventEmitter<string|MaterializeAction>();
   title = 'CHORDZ';
   publicChords;
   userChords;
   counter = 1;
   
-  constructor (private auth: Auth, private chordsService: ChordsService, private router: Router) {
+  constructor (private auth: Auth, private chordsService: ChordsService, private router: Router)
+  {
     chordsService.getPublicChords().subscribe((result) => {
       this.publicChords = result;
     });
-    
-    /*if (this.auth.authenticated() && this.auth.userProfile)
-    {
-      chordsService.getUserChords(this.auth.userProfile.email).subscribe((result) => {
-        this.userChords = result;
-      });
-      console.log(this.userChords);
-    }*/
   }
+  
   
   getUserChordsApp()
   {
@@ -51,6 +41,7 @@ export class AppComponent {
     return true;
   }
 
+
   getPrivacy(isPublic)
   {
     if (isPublic)
@@ -58,6 +49,7 @@ export class AppComponent {
     else
       return "private";
   }
+
 
   checkRoute()
   {
@@ -67,13 +59,17 @@ export class AppComponent {
       return true;
   }
   
+  
   openModal(id)
   {
     $('#' + id).modal('open');
   }
   
+  
   closeModal(id)
   {
     $('#' + id).modal('close');
   }
+  
+  
 }
