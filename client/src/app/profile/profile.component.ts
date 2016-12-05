@@ -68,8 +68,6 @@ export class ProfileComponent implements OnInit {
         else
         {
           
-          console.log(isPublic);
-          
           this.chordsService.postUserChord(this.auth.userProfile.email, title, 1, chordDoc, isPublic).subscribe((result) => {
 
             if (result.message)
@@ -87,7 +85,7 @@ export class ProfileComponent implements OnInit {
       }
       else
       {
-        alert("Please specify a title using {title: yourTitle} or {t: yourTitle} in the chord sheet.");
+        alert("Error: Please specify a title using {title: yourTitle} or {t: yourTitle} in the chord sheet.");
       }
       
     }

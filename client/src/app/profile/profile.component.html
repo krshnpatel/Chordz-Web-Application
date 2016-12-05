@@ -141,8 +141,8 @@
                                 
                                 <div class="row center">
                                     <div class="col s12">
-                                        <button class="btn" (click)="closeModal('rename' + userChord._id)"><i class="material-icons right">clear</i>Cancel</button>
-                                        <button class="btn" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, isPublic.checked, newTitle)"><i class="material-icons right">done</i>Confirm</button>                
+                                        <button class="btn renameCancelButton" (click)="closeModal('rename' + userChord._id)"><i class="material-icons right">clear</i>Cancel</button>
+                                        <button class="btn renameOkayButton" (click)="renameChordSheet(userChord.title, userChord.version, userChord.chordDoc, isPublic.checked, newTitle)"><i class="material-icons right">done</i>Confirm</button>                
                                     </div>
                                 </div>
                                 
