@@ -10,7 +10,10 @@ var options = {
   },
   languageDictionary: {
     title: "CHORDZ"
-  }
+  },
+  theme: {
+    logo: '../favicon.ico'
+  }  
 };
 
 
